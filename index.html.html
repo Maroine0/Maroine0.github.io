@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maroine Imounane — Développement & Science des données</title>
+<meta name="description" content="Portfolio de Maroine Imounane, étudiant en BUT Informatique & Science des données (IUT de Villetaneuse, USPN). Recherche d'alternance 2026–2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/xterm/5.3.0/xterm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/5.3.0/xterm.min.js" defer></script>
+<style>
+:root{
+  --paper:#F4F5F7;
+  --surface:#FFFFFF;
+  --ink:#0D131E;
+  --muted:#59626F;
+  --line:#DEE2EA;
+  --blue:#2547D0;
+  --blue-soft:#E9EDFB;
+  --dot:#F2B807;
+  --red:#E5484D;
+  --green:#3E9B4F;
+  --radius:12px;
+  --maxw:1100px;
+  --d:"Syne",sans-serif;
+  --b:"Instrument Sans",system-ui,sans-serif;
+  --m:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--b);background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--blue);color:#fff}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+/* ============ NAV ============ */
+header{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .25s ease,border-color .25s ease;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(244,245,247,.88);backdrop-filter:blur(12px);border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:var(--m);font-size:.85rem;display:flex;align-items:center;gap:9px}
+.logo .sq{width:11px;height:11px;background:var(--blue);display:inline-block}
+.nav-links{display:flex;gap:26px;list-style:none;font-family:var(--m);font-size:.8rem}
+.nav-links a{color:var(--muted);position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--dot);transition:width .2s ease}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+
+/* ============ HERO ============ */
+.hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 40px;position:relative}
+.hero-eyebrow{font-family:var(--m);font-size:.82rem;color:var(--blue);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow .pulse{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(62,155,79,.5);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(62,155,79,0)}100%{box-shadow:0 0 0 0 rgba(62,155,79,0)}}
+h1{font-family:var(--d);font-weight:800;font-size:clamp(3.2rem,10.5vw,7.2rem);line-height:.98;letter-spacing:-.03em;text-transform:uppercase}
+h1 .outline{color:transparent;-webkit-text-stroke:2px var(--ink);text-stroke:2px var(--ink)}
+.hero-roles{margin-top:30px;font-size:clamp(1.05rem,2.2vw,1.35rem);color:var(--muted);display:flex;align-items:baseline;gap:.5em;flex-wrap:wrap}
+.hero-roles .role{font-family:var(--d);font-weight:700;color:var(--ink);position:relative;display:inline-block;min-width:11ch}
+.hero-roles .role::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:3px;background:var(--dot)}
+.role-swap{transition:opacity .3s ease,transform .3s ease;display:inline-block}
+.role-swap.out{opacity:0;transform:translateY(8px)}
+.hero-cta{margin-top:42px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border-radius:100px;font-weight:600;font-size:.95rem;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-fill{background:var(--ink);color:#fff}
+.btn-fill:hover{background:var(--blue);box-shadow:0 8px 24px rgba(37,71,208,.35)}
+.btn-line{border:1.5px solid var(--ink)}
+.btn-line:hover{border-color:var(--blue);color:var(--blue)}
+.hero-meta{position:absolute;bottom:26px;left:0;right:0;border-top:1px solid var(--line);padding-top:16px;display:flex;gap:34px;flex-wrap:wrap;font-family:var(--m);font-size:.76rem;color:var(--muted)}
+.hero-meta b{color:var(--ink);font-weight:500}
+
+/* ============ PAC DIVIDER (signature) ============ */
+.pac-divider{padding:34px 0 30px;overflow:hidden}
+.pac-track{position:relative;display:flex;align-items:center;justify-content:space-between;height:26px}
+.pac-track .pdot{width:9px;height:9px;background:var(--dot);flex:0 0 auto;transition:opacity .25s ease,transform .25s ease}
+.pac-track .pdot.eaten{opacity:0;transform:scale(.2)}
+.muncher{position:absolute;top:50%;width:20px;height:20px;background:var(--blue);transform:translate(-50%,-50%);transition:left .12s linear}
+.muncher::before{content:"";position:absolute;inset:4px 4px auto auto;width:4px;height:4px;background:var(--paper)}
+.pac-caption{text-align:right;font-family:var(--m);font-size:.7rem;color:var(--muted);margin-top:10px}
+
+/* ============ SECTIONS ============ */
+section{padding:96px 0}
+.sec-head{display:flex;align-items:baseline;gap:20px;margin-bottom:48px;flex-wrap:wrap}
+.sec-head .tag-mono{font-family:var(--m);font-size:.78rem;color:var(--blue)}
+h2{font-family:var(--d);font-weight:800;font-size:clamp(1.9rem,4.5vw,2.9rem);letter-spacing:-.02em;text-transform:uppercase;line-height:1.05}
+.sec-head .rule{flex:1;height:1px;background:var(--line);min-width:60px}
+
+/* ============ MARQUEE ============ */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--surface)}
+.marquee-track{display:flex;gap:0;width:max-content;animation:scroll 30s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{font-family:var(--d);font-weight:700;font-size:1.5rem;text-transform:uppercase;letter-spacing:.01em;padding:0 26px;white-space:nowrap}
+.marquee span:nth-child(even){color:transparent;-webkit-text-stroke:1.2px var(--muted)}
+.marquee span:nth-child(odd)::before{content:"■";color:var(--dot);font-size:.7rem;vertical-align:middle;margin-right:26px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ============ À PROPOS ============ */
+.about-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:60px}
+.about-lead{font-family:var(--d);font-weight:600;font-size:clamp(1.25rem,2.6vw,1.7rem);line-height:1.35;letter-spacing:-.01em;margin-bottom:26px}
+.about-lead em{font-style:normal;color:var(--blue)}
+.about-grid p:not(.about-lead){color:var(--muted);margin-bottom:16px;max-width:36em}
+.about-grid strong{color:var(--ink);font-weight:600}
+.facts{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;align-self:start;font-family:var(--m);font-size:.82rem}
+.facts .f-title{color:var(--muted);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+.facts dl{display:grid;grid-template-columns:auto 1fr;column-gap:20px}
+.facts dt{color:var(--muted);padding:8px 0;border-bottom:1px dashed var(--line)}
+.facts dd{padding:8px 0;border-bottom:1px dashed var(--line)}
+.facts dt:last-of-type,.facts dd:last-of-type{border-bottom:none}
+.facts .ok{display:inline-block;background:var(--blue-soft);color:var(--blue);padding:2px 9px;border-radius:5px}
+
+/* ============ COMPÉTENCES ============ */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.skill-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:transform .2s ease,box-shadow .2s ease}
+.skill-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(13,19,30,.09)}
+.skill-card .sq{width:12px;height:12px;margin-bottom:16px}
+.skill-card:nth-child(1) .sq{background:var(--blue)}
+.skill-card:nth-child(2) .sq{background:var(--dot)}
+.skill-card:nth-child(3) .sq{background:var(--red)}
+.skill-card:nth-child(4) .sq{background:var(--green)}
+.skill-card h3{font-family:var(--d);font-weight:700;font-size:1.02rem;text-transform:uppercase;letter-spacing:.01em;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--m);font-size:.76rem;padding:5px 12px;border-radius:100px;border:1px solid var(--line);color:var(--muted);transition:border-color .15s,color .15s}
+.skill-card:hover .chip{color:var(--ink)}
+.chip.hl{border-color:var(--ink);color:var(--ink);font-weight:500}
+
+/* ============ PARCOURS ============ */
+.tl{list-style:none}
+.tl li{display:grid;grid-template-columns:150px 1fr;gap:34px;padding:30px 0;border-top:1px solid var(--line)}
+.tl li:last-child{border-bottom:1px solid var(--line)}
+.tl-year{font-family:var(--m);font-size:.82rem;color:var(--blue);padding-top:5px}
+.tl-title{font-family:var(--d);font-weight:700;font-size:1.25rem;letter-spacing:-.01em}
+.tl-org{font-family:var(--m);font-size:.78rem;color:var(--muted);margin:4px 0 10px}
+.tl-desc{color:var(--muted);font-size:.95rem;max-width:46em}
+.tl-desc ul{margin:6px 0 0 18px}
+.tl-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+
+/* ============ PROJETS ============ */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:12px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.proj:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,19,30,.1);border-color:#C8CFDC}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.proj-meta{font-family:var(--m);font-size:.72rem;color:var(--muted)}
+.proj-arrow{font-family:var(--d);font-weight:700;font-size:1.2rem;color:var(--line);transition:color .2s,transform .2s}
+.proj:hover .proj-arrow{color:var(--blue);transform:translate(3px,-3px)}
+.proj h3{font-family:var(--d);font-weight:700;font-size:1.35rem;letter-spacing:-.01em;text-transform:uppercase}
+.proj p{color:var(--muted);font-size:.93rem;flex:1}
+
+/* Terminal Pac-Man */
+.term{grid-column:1 / -1;background:#101623;border:1px solid #232C3E;border-radius:var(--radius);overflow:hidden;color:#D7DEEA}
+.term:hover{border-color:#35415C}
+.term-bar{display:flex;align-items:center;gap:8px;background:#161E2E;padding:11px 16px;border-bottom:1px solid #232C3E}
+.term-bar .tdot{width:11px;height:11px;border-radius:50%}
+.term-bar .tdot:nth-child(1){background:#E5484D}
+.term-bar .tdot:nth-child(2){background:#F2B807}
+.term-bar .tdot:nth-child(3){background:#3E9B4F}
+.term-bar .term-title{font-family:var(--m);font-size:.72rem;color:#8A94A8;margin-left:8px}
+.term-body{display:grid;grid-template-columns:1.1fr .9fr;gap:34px;padding:28px 30px}
+.term-code{font-family:var(--m);font-size:.82rem;line-height:1.9}
+.term-code .pr{color:#5DA9FF}
+.term-code .cm{color:#5A6478}
+.term-code .ylw{color:var(--dot)}
+.term-info h3{font-family:var(--d);font-weight:700;font-size:1.35rem;text-transform:uppercase;color:#fff;margin-bottom:10px}
+.term-info p{color:#98A2B6;font-size:.92rem;margin-bottom:16px}
+.term-info .chip{border-color:#2C3650;color:#98A2B6}
+.mini-map{margin-top:14px;display:inline-block;line-height:0;border:1px solid #232C3E;padding:8px;background:#0B101B}
+.mini-map .row{display:flex}
+.mini-map i{width:14px;height:14px;display:inline-block}
+.mm-w{background:#2E7D3A}.mm-d{background:transparent;position:relative}
+.mm-d::after{content:"";position:absolute;inset:5px;background:var(--dot)}
+.mm-p{background:#2547D0}.mm-f{background:#E5484D}.mm-v{background:transparent}
+.term-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--m);font-size:.8rem;color:#5DA9FF;margin-top:18px}
+.term-link:hover{text-decoration:underline}
+
+/* Terminal interactif */
+#pacterm{position:relative;background:#0B101B;border:1px solid #232C3E;border-radius:8px;padding:10px;min-height:440px;overflow:hidden}
+.term-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(11,16,27,.94);cursor:pointer;border-radius:8px;z-index:2;font-family:var(--m);text-align:center;padding:20px}
+.term-overlay .play{width:56px;height:56px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.15rem;transition:transform .15s ease}
+.term-overlay:hover .play{transform:scale(1.1)}
+.term-overlay .big{color:#fff;font-size:.95rem}
+.term-overlay .small{color:#8A94A8;font-size:.74rem}
+.dpad{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.dk{font-family:var(--m);font-size:.78rem;background:#161E2E;border:1px solid #2C3650;color:#C6CDDB;border-radius:7px;padding:8px 14px;cursor:pointer;transition:border-color .15s,color .15s}
+.dk:hover{border-color:#5DA9FF;color:#fff}
+
+/* ============ CONTACT ============ */
+.contact{background:var(--ink);color:#fff;border-radius:18px;padding:70px 60px;text-align:left;position:relative;overflow:hidden}
+.contact::before{content:"";position:absolute;top:-40px;right:-40px;width:220px;height:220px;background:radial-gradient(circle,rgba(37,71,208,.35),transparent 70%)}
+.contact .tag-mono{font-family:var(--m);font-size:.78rem;color:#7C96EE;display:block;margin-bottom:16px}
+.contact h2{color:#fff;margin-bottom:14px}
+.contact p{color:#A6AEBD;max-width:36em;margin-bottom:34px}
+.mail-big{font-family:var(--d);font-weight:700;font-size:clamp(1.15rem,3.4vw,2.1rem);letter-spacing:-.01em;color:#fff;display:inline-block;border-bottom:3px solid var(--dot);padding-bottom:6px;transition:color .2s}
+.mail-big:hover{color:var(--dot)}
+.contact-row{display:flex;gap:28px;flex-wrap:wrap;margin-top:38px;font-family:var(--m);font-size:.82rem}
+.contact-row a{color:#C6CDDB;border-bottom:1px dashed #3A4356;padding-bottom:2px}
+.contact-row a:hover{color:#fff;border-color:#fff}
+
+/* ============ FOOTER ============ */
+footer{padding:34px 0 40px}
+.footer-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--m);font-size:.74rem;color:var(--muted)}
+.footer-row .sq{width:9px;height:9px;background:var(--blue);display:inline-block;margin-right:8px}
+
+/* ============ REVEAL / MOTION ============ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .55s ease,transform .55s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .marquee-track{animation:none}
+  .hero-eyebrow .pulse{animation:none}
+  .btn,.proj,.skill-card,.muncher{transition:none}
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:900px){
+  .about-grid,.term-body{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .tl li{grid-template-columns:1fr;gap:8px}
+  section{padding:70px 0}
+  .contact{padding:46px 30px}
+  .hero{min-height:auto;padding:130px 0 90px}
+  .hero-meta{position:static;margin-top:56px}
+  .nav-links li:nth-child(n+4){display:none}
+}
+</style>
+</head>
+<body>
+
+<header id="site-header">
+  <div class="wrap nav">
+    <a class="logo" href="#top"><span class="sq"></span>maroine.imounane</a>
+    <nav aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a href="#apropos">à propos</a></li>
+        <li><a href="#competences">compétences</a></li>
+        <li><a href="#parcours">parcours</a></li>
+        <li><a href="#projets">projets</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="wrap">
+      <p class="hero-eyebrow"><span class="pulse"></span>disponible — alternance 2026–2027 · rythme 2 sem / 2 sem</p>
+      <h1>Maroine<br><span class="outline">Imounane</span></h1>
+      <p class="hero-roles">
+        Étudiant BUT Informatique, spécialisé en
+        <span class="role"><span class="role-swap" id="roleSwap">science des données</span></span>
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-fill" href="#projets">Voir mes projets</a>
+        <a class="btn btn-line" href="#contact">Me contacter</a>
+      </div>
+    </div>
+    <div class="wrap hero-meta">
+      <span>base — <b>Goussainville (95) · Île-de-France</b></span>
+      <span>formation — <b>IUT de Villetaneuse · USPN</b></span>
+      <span>mobilité — <b>Permis B + véhicule</b></span>
+      <span>langues — <b>FR · EN B1 · DE A1</b></span>
+    </div>
+  </div>
+
+  <!-- ================= SIGNATURE : DIVIDER PAC ================= -->
+  <div class="wrap pac-divider" aria-hidden="true">
+    <div class="pac-track" id="pacTrack">
+      <div class="muncher" id="muncher"></div>
+    </div>
+    <p class="pac-caption">// le carré bleu, c'est moi — jouable dans le projet Pac-Man plus bas</p>
+  </div>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>Python</span><span>Java</span><span>SQL</span><span>C</span><span>React</span><span>Laravel</span><span>Power BI</span><span>Linux</span><span>Pandas</span><span>Git</span><span>JavaScript</span><span>R</span>
+    </div>
+  </div>
+
+  <!-- ================= À PROPOS ================= -->
+  <section id="apropos">
+    <div class="wrap reveal">
+      <div class="sec-head">
+        <span class="tag-mono">/à-propos</span>
+        <h2>Code & données</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p class="about-lead">
+            J'aime comprendre <em>le pourquoi derrière le comment</em> — qu'il s'agisse
+            d'un pointeur en C, d'un dataset à explorer ou d'une architecture client-serveur.
+          </p>
+          <p>
+            Après une première année de licence d'informatique, j'ai rejoint le
+            <strong>BUT Technologies de l'information, parcours Informatique / Science des
+            données</strong> à l'IUT de Villetaneuse (Université Sorbonne Paris Nord), un cursus
+            qui combine développement logiciel et analyse de données.
+          </p>
+          <p>
+            En dehors des cours, je développe des <strong>jeux en C jouables en terminal</strong>
+            et je m'intéresse à tout ce qui touche à la conception de jeux vidéo. Je recherche
+            une <strong>alternance pour 2026–2027</strong> où mettre cette curiosité au service
+            de projets concrets.
+          </p>
+        </div>
+        <aside class="facts">
+          <p class="f-title">profil — en bref</p>
+          <dl>
+            <dt>statut</dt><dd>BUT2 → BUT3</dd>
+            <dt>recherche</dt><dd>Alternance 2026–2027</dd>
+            <dt>rythme</dt><dd>2 semaines / 2 semaines</dd>
+            <dt>intérêts</dt><dd>Jeux vidéo · Manga · Tech</dd>
+            <dt>dispo</dt><dd><span class="ok">ouvert aux opportunités</span></dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COMPÉTENCES ================= -->
+  <section id="competences" style="padding-top:0">
+    <div class="wrap reveal">
+      <div class="sec-head">
+        <span class="tag-mono">/compétences</span>
+        <h2>Boîte à outils</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="sq"></div>
+          <h3>Langages</h3>
+          <div class="chips">
+            <span class="chip hl">Python</span><span class="chip hl">Java</span>
+            <span class="chip hl">SQL</span><span class="chip">C</span>
+            <span class="chip">JavaScript</span><span class="chip">PHP</span>
+            <span class="chip">R</span><span class="chip">OCaml</span><span class="chip">HTML/CSS</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="sq"></div>
+          <h3>Frameworks & libs</h3>
+          <div class="chips">
+            <span class="chip hl">React</span><span class="chip hl">Laravel</span>
+            <span class="chip">Pandas</span><span class="chip">Matplotlib</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="sq"></div>
+          <h3>Outils</h3>
+          <div class="chips">
+            <span class="chip hl">Git</span><span class="chip hl">Power BI</span>
+            <span class="chip">Power Automate</span><span class="chip">Copilot Studio</span>
+            <span class="chip">WordPress</span>
+          </div>
+        </div>
+        <div class="skill-card">
+          <div class="sq"></div>
+          <h3>Environnements</h3>
+          <div class="chips">
+            <span class="chip hl">Linux</span><span class="chip">Client-serveur</span>
+            <span class="chip">IoT</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PARCOURS ================= -->
+  <section id="parcours" style="padding-top:0">
+    <div class="wrap reveal">
+      <div class="sec-head">
+        <span class="tag-mono">/parcours</span>
+        <h2>Expérience & formation</h2>
+        <span class="rule"></span>
+      </div>
+      <ul class="tl">
+        <li>
+          <span class="tl-year">2026</span>
+          <div>
+            <p class="tl-title">Stage — Analyse de données & IA, Employee Experience</p>
+            <p class="tl-org">Schneider Electric Industries SAS</p>
+            <div class="tl-desc">
+              <ul>
+                <li>Support informatique de niveau 2 auprès des collaborateurs</li>
+                <li>Analyse de données et création de rapports</li>
+                <li>Automatisation de processus internes</li>
+              </ul>
+            </div>
+            <div class="tl-chips">
+              <span class="chip">Python</span><span class="chip">Power BI</span>
+              <span class="chip">Power Automate</span><span class="chip">Copilot Studio</span>
+            </div>
+          </div>
+        </li>
+        <li>
+          <span class="tl-year">2025 — 2027</span>
+          <div>
+            <p class="tl-title">BUT Technologies de l'information — Informatique / Science des données</p>
+            <p class="tl-org">IUT de Villetaneuse · Université Sorbonne Paris Nord</p>
+            <p class="tl-desc">Java, développement web, statistiques descriptives et inférentielles, R, SQL, architecture réseau.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-year">2024 — 2025</span>
+          <div>
+            <p class="tl-title">Licence Informatique (L1)</p>
+            <p class="tl-org">Université Sorbonne Paris Nord · Villetaneuse</p>
+            <p class="tl-desc">Unix, langage C, paradigme fonctionnel, algèbre linéaire, analyse.</p>
+          </div>
+        </li>
+        <li>
+          <span class="tl-year">2021 — 2024</span>
+          <div>
+            <p class="tl-title">Baccalauréat général — Mention Assez Bien</p>
+            <p class="tl-org">Lycée Romain Rolland · Goussainville</p>
+            <p class="tl-desc">Spécialités : Mathématiques, NSI, Physique-Chimie.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= PROJETS ================= -->
+  <section id="projets" style="padding-top:0">
+    <div class="wrap reveal">
+      <div class="sec-head">
+        <span class="tag-mono">/projets</span>
+        <h2>Projets sélectionnés</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="proj-grid">
+
+        <!-- Pac-Man : le vrai jeu, compilé en WebAssembly -->
+        <div class="proj term" style="padding:0">
+          <div class="term-bar">
+            <span class="tdot"></span><span class="tdot"></span><span class="tdot"></span>
+            <span class="term-title">maroine@portfolio: ~/pac-man-lite — jeu réel (C → WebAssembly)</span>
+          </div>
+          <div class="term-body">
+            <div>
+              <div id="pacterm">
+                <div class="term-overlay" id="term-overlay">
+                  <div class="play">▶</div>
+                  <div class="big">Lancer le terminal</div>
+                  <div class="small">le vrai binaire, compilé depuis mon code C</div>
+                </div>
+              </div>
+              <div class="dpad" aria-label="Contrôles">
+                <button class="dk" data-k="1003">↑</button>
+                <button class="dk" data-k="1002">↓</button>
+                <button class="dk" data-k="1000">←</button>
+                <button class="dk" data-k="1001">→</button>
+                <button class="dk" data-k="32">start</button>
+                <button class="dk" data-k="111">o</button>
+                <button class="dk" data-k="110">n</button>
+                <button class="dk" data-k="27">échap</button>
+              </div>
+            </div>
+            <div class="term-info">
+              <h3>Pac-Man lite</h3>
+              <p>
+                Ce n'est pas une réplique : c'est <strong style="color:#fff">mon vrai code C</strong>,
+                compilé en WebAssembly (Emscripten) et branché sur un émulateur de terminal.
+                Pointeurs, allocation dynamique, fantôme aléatoire — tout tourne dans votre navigateur.
+              </p>
+              <p style="font-family:var(--m);font-size:.78rem;line-height:2">
+                1. tapez <span style="color:#F2B807">make</span> pour compiler<br>
+                2. lancez <span style="color:#F2B807">./PacMan</span><br>
+                3. jouez aux <span style="color:#F2B807">flèches</span> — mangez les carrés jaunes,
+                fuyez le <span style="color:#E5484D">fantôme rouge</span>
+              </p>
+              <div class="chips">
+                <span class="chip">C</span><span class="chip">WebAssembly</span>
+                <span class="chip">Emscripten</span><span class="chip">xterm.js</span>
+              </div>
+              <a class="term-link" href="https://github.com/Maroine0/Pac-man-lite" target="_blank" rel="noopener">→ voir le code sur GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <article class="proj">
+          <div class="proj-top">
+            <span class="proj-meta">2026 · équipe de 3 · IoT</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <h3>Système audio embarqué</h3>
+          <p>
+            Player audio autonome piloté par une application web de gestion. Conception d'un
+            serveur web et d'une API pour synchroniser des playlists à distance.
+          </p>
+          <div class="chips">
+            <span class="chip">Linux</span><span class="chip">Client-serveur</span><span class="chip">API REST</span>
+          </div>
+        </article>
+
+        <article class="proj">
+          <div class="proj-top">
+            <span class="proj-meta">2026 · équipe de 3 · data</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <h3>Analyse de données</h3>
+          <p>
+            Exploration complète d'un dataset : nettoyage, visualisations avec Matplotlib et
+            rédaction d'un rapport d'analyse avec restitution orale.
+          </p>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">Matplotlib</span>
+          </div>
+        </article>
+
+        <article class="proj" style="grid-column:1 / -1">
+          <div class="proj-top">
+            <span class="proj-meta">2024–2025 · solo · jeu</span>
+            <span class="proj-arrow">↗</span>
+          </div>
+          <h3>Dice Versus</h3>
+          <p>
+            Jeu de dés personnel jouable en terminal Linux : structures de données (struct),
+            manipulation de fichiers et logique de jeu maison.
+          </p>
+          <div class="chips">
+            <span class="chip">C</span><span class="chip">Structs</span><span class="chip">Fichiers</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" style="padding-top:0">
+    <div class="wrap reveal">
+      <div class="contact">
+        <span class="tag-mono">/contact</span>
+        <h2>Discutons alternance</h2>
+        <p>
+          Disponible pour un échange dès maintenant — rythme 2 semaines en entreprise /
+          2 semaines en formation, à partir de 2026.
+        </p>
+        <a class="mail-big" href="mailto:maroine.imounane@edu.univ-paris13.fr">maroine.imounane@edu.univ-paris13.fr</a>
+        <div class="contact-row">
+          <a href="tel:+33661469415">+33 6 61 46 94 15</a>
+          <a href="https://github.com/Maroine0" target="_blank" rel="noopener">github.com/Maroine0</a>
+          <a href="https://linkedin.com/in/maroine-imounane" target="_blank" rel="noopener">linkedin.com/in/maroine-imounane</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span><span class="sq"></span>© 2026 Maroine Imounane</span>
+    <span>conçu & codé — Île-de-France</span>
+  </div>
+</footer>
+
+<script>
+const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* Nav : fond au scroll */
+const headerEl = document.getElementById('site-header');
+const onScrollHeader = () => headerEl.classList.toggle('scrolled', window.scrollY > 24);
+window.addEventListener('scroll', onScrollHeader, {passive:true});
+onScrollHeader();
+
+/* Rotation des rôles */
+const roles = ["science des données", "développement web", "jeux vidéo (en C !)"];
+const swap = document.getElementById('roleSwap');
+if (!reduced) {
+  let i = 0;
+  setInterval(() => {
+    swap.classList.add('out');
+    setTimeout(() => {
+      i = (i + 1) % roles.length;
+      swap.textContent = roles[i];
+      swap.classList.remove('out');
+    }, 300);
+  }, 2800);
+}
+
+/* Marquee : duplication de la piste pour la boucle infinie */
+const track = document.getElementById('marqueeTrack');
+track.innerHTML += track.innerHTML;
+
+/* Signature : le carré bleu mange les carrés jaunes au scroll */
+const pacTrack = document.getElementById('pacTrack');
+const muncher = document.getElementById('muncher');
+const NB_DOTS = 36;
+for (let d = 0; d < NB_DOTS; d++) {
+  const s = document.createElement('div');
+  s.className = 'pdot';
+  pacTrack.appendChild(s);
+}
+const dots = pacTrack.querySelectorAll('.pdot');
+
+function updateMuncher(){
+  const r = pacTrack.getBoundingClientRect();
+  const vh = window.innerHeight;
+  /* progression : 0 quand la piste entre en bas de l'écran, 1 quand elle atteint 20% du haut */
+  let prog = (vh - r.top) / (vh * 0.8);
+  prog = Math.max(0, Math.min(1, prog));
+  muncher.style.left = (prog * 100) + '%';
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('eaten', idx / NB_DOTS < prog);
+  });
+}
+if (!reduced) {
+  window.addEventListener('scroll', updateMuncher, {passive:true});
+  window.addEventListener('resize', updateMuncher);
+  updateMuncher();
+} else {
+  muncher.style.left = '100%';
+  dots.forEach(d => d.classList.add('eaten'));
+}
+
+/* Révélation des sections */
+const reveals = document.querySelectorAll('.reveal');
+if (!reduced && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.1});
+  reveals.forEach(el => io.observe(el));
+} else {
+  reveals.forEach(el => el.classList.add('in'));
+}
+/* ================= TERMINAL PAC-MAN (WASM) ================= */
+(function(){
+  const mount = document.getElementById('pacterm');
+  const overlay = document.getElementById('term-overlay');
+  if (!mount || !overlay) return;
+
+  let term = null, mode = 'shell', built = false, buf = '';
+  const q = [];  // file de touches lue par le C (web_getch)
+  const P = '\x1b[1;32mmaroine@portfolio\x1b[0m:\x1b[1;34m~/pac-man-lite\x1b[0m$ ';
+  const FILES = 'Grille.c  Grille.h  main.c  makefile  map.txt  pion.c  pion.h  README.txt';
+
+  function w(s){ term.write(s); }
+
+  function exec(cmd){
+    const c = cmd.trim();
+    if (c === '') return;
+    if (c === 'help') {
+      w('commandes disponibles :\r\n');
+      w('  \x1b[33mls\x1b[0m              lister les fichiers\r\n');
+      w('  \x1b[33mcat README.txt\x1b[0m  lire les règles\r\n');
+      w('  \x1b[33mmake\x1b[0m            compiler le jeu\r\n');
+      w('  \x1b[33m./PacMan\x1b[0m        jouer !\r\n');
+      w('  \x1b[33mclear\x1b[0m           nettoyer l\'écran\r\n');
+    }
+    else if (c === 'ls') {
+      w(FILES + (built ? '  \x1b[1;32mPacMan\x1b[0m' : '') + '\r\n');
+    }
+    else if (c === 'cat README.txt' || c === 'cat readme.txt') {
+      w('PAC-MAN LITE — par Maroine Imounane & Ali Gurkan (L1 info, USPN)\r\n');
+      w('But : ramasser tous les carrés \x1b[33mjaunes\x1b[0m sans toucher le fantôme \x1b[31mrouge\x1b[0m.\r\n');
+      w('Des tunnels sur les côtés permettent de traverser la carte. Bonne chance !\r\n');
+    }
+    else if (c === 'make') {
+      if (built) { w('make: « PacMan » est à jour.\r\n'); }
+      else {
+        w('gcc -c main.c\r\ngcc -c Grille.c\r\ngcc -c pion.c\r\n');
+        w('gcc -o PacMan main.o Grille.o pion.o -lncurses\r\n');
+        built = true;
+      }
+    }
+    else if (c === 'clear') { w('\x1b[2J\x1b[H'); }
+    else if (c === 'pwd') { w('/home/maroine/pac-man-lite\r\n'); }
+    else if (c === 'whoami') { w('maroine\r\n'); }
+    else if (c.startsWith('sudo')) { w('maroine n\'apparaît pas dans le fichier sudoers. Cet incident sera signalé.\r\n'); }
+    else if (c === './PacMan' || c === './pacman' || c === './Pacman') {
+      if (!built) {
+        w('bash: ' + c + ': Aucun fichier ou dossier de ce type\r\n');
+        w('\x1b[90m(astuce : compilez d\'abord avec \x1b[33mmake\x1b[90m)\x1b[0m\r\n');
+      } else { startGame(); }
+    }
+    else { w('bash: ' + c.split(' ')[0] + ': commande introuvable — tapez \x1b[33mhelp\x1b[0m\r\n'); }
+  }
+
+  function loadScript(src){
+    return new Promise((res, rej) => {
+      const s = document.createElement('script');
+      s.src = src; s.onload = res; s.onerror = rej;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function startGame(){
+    mode = 'loading';
+    if (typeof createPacman === 'undefined') {
+      w('chargement du binaire WebAssembly...\r\n');
+      try { await loadScript('pacman.js'); }
+      catch(e) {
+        w('\x1b[31merreur : pacman.js introuvable (placez-le à côté du fichier HTML)\x1b[0m\r\n');
+        mode = 'shell'; w(P); return;
+      }
+    }
+    q.length = 0; mode = 'game';
+    createPacman({
+      termWrite: s => term.write(s.replace(/\n/g, '\r\n')),
+      keyQueue: q,
+      onExit: () => { mode = 'shell'; w('\r\n' + P); }
+    });
+  }
+
+  function onData(d){
+    if (mode === 'game') {
+      if (d === '\x1b[A') q.push(1003);
+      else if (d === '\x1b[B') q.push(1002);
+      else if (d === '\x1b[C') q.push(1001);
+      else if (d === '\x1b[D') q.push(1000);
+      else if (d === '\x1b') q.push(27);
+      else if (d.length === 1) q.push(d.charCodeAt(0));
+      return;
+    }
+    if (mode !== 'shell') return;
+    if (d === '\r') { w('\r\n'); exec(buf); buf = ''; if (mode === 'shell') w(P); }
+    else if (d === '\x7f') { if (buf.length) { buf = buf.slice(0, -1); w('\b \b'); } }
+    else if (d.length === 1 && d >= ' ') { buf += d; w(d); }
+  }
+
+  overlay.addEventListener('click', () => {
+    if (typeof Terminal === 'undefined') return;
+    overlay.style.display = 'none';
+    term = new Terminal({
+      cols: 46, rows: 28, fontSize: 13, cursorBlink: true,
+      fontFamily: '"IBM Plex Mono", monospace',
+      theme: { background: '#0B101B', foreground: '#D7DEEA', cursor: '#F2B807' }
+    });
+    term.open(mount);
+    term.onData(onData);
+    w('\x1b[1;34m~~~ Pac\x1b[1;31mMan lite\x1b[0m — le vrai code C, compilé en WebAssembly\r\n');
+    w('tapez \x1b[33mhelp\x1b[0m pour voir les commandes\r\n\r\n' + P);
+    term.focus();
+  });
+
+  document.querySelectorAll('.dk').forEach(b => {
+    b.addEventListener('click', () => {
+      if (mode === 'game') q.push(parseInt(b.dataset.k, 10));
+      if (term) term.focus();
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
