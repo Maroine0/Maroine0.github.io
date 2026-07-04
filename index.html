@@ -274,17 +274,35 @@
         </a>
 
         <article class="proj">
+          <!-- Fond stylisé : deux dés qui s'affrontent, bleu contre rouge -->
+          <svg class="proj-bg" viewBox="0 0 160 100" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+            <g class="die die-a">
+              <rect x="30" y="38" width="46" height="46" rx="9" fill="var(--blue)"/>
+              <g fill="var(--surface)">
+                <circle cx="41.5" cy="49.5" r="4.5"/><circle cx="64.5" cy="49.5" r="4.5"/>
+                <circle cx="53" cy="61" r="4.5"/>
+                <circle cx="41.5" cy="72.5" r="4.5"/><circle cx="64.5" cy="72.5" r="4.5"/>
+              </g>
+            </g>
+            <g class="die die-b">
+              <rect x="95" y="42" width="46" height="46" rx="9" fill="var(--red)"/>
+              <g fill="var(--surface)">
+                <circle cx="106.5" cy="53.5" r="4.5"/><circle cx="118" cy="65" r="4.5"/>
+                <circle cx="129.5" cy="76.5" r="4.5"/>
+              </g>
+            </g>
+          </svg>
           <div class="proj-top">
-            <span class="proj-meta">2026 · équipe de 3 · IoT</span>
+            <span class="proj-meta">2024–2025 · solo · jeu</span>
             <span class="proj-arrow">↗</span>
           </div>
-          <h3>Système audio embarqué</h3>
+          <h3>Dice Versus</h3>
           <p>
-            Player audio autonome piloté par une application web de gestion. Conception d'un
-            serveur web et d'une API pour synchroniser des playlists à distance.
+            Jeu de dés personnel jouable en terminal Linux : structures de données (struct),
+            manipulation de fichiers et logique de jeu maison.
           </p>
           <div class="chips">
-            <span class="chip">Linux</span><span class="chip">Client-serveur</span><span class="chip">API REST</span>
+            <span class="chip">C</span><span class="chip">Structs</span><span class="chip">Fichiers</span>
           </div>
         </article>
 
@@ -319,18 +337,64 @@
           </div>
         </article>
 
-        <article class="proj" style="grid-column:1 / -1">
+        <article class="proj proj-audio" style="grid-column:1 / -1">
+          <!-- Fond stylisé : forme d'onde audio avec tête de lecture -->
+          <svg class="proj-bg" viewBox="0 0 600 96" preserveAspectRatio="none" aria-hidden="true">
+            <g fill="var(--blue)">
+              <rect class="wave" x="4" y="38.9" width="7" height="18.3" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="19" y="30.3" width="7" height="35.4" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="34" y="29.7" width="7" height="36.6" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="49" y="33.0" width="7" height="29.9" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="64" y="29.6" width="7" height="36.8" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="79" y="34.6" width="7" height="26.7" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="94" y="38.8" width="7" height="18.4" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="109" y="36.9" width="7" height="22.3" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="124" y="37.3" width="7" height="21.4" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="139" y="32.4" width="7" height="31.2" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="154" y="28.8" width="7" height="38.4" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="169" y="33.6" width="7" height="28.7" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="184" y="30.1" width="7" height="35.9" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="199" y="32.2" width="7" height="31.6" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="214" y="40.2" width="7" height="15.6" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="229" y="38.2" width="7" height="19.6" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="244" y="36.1" width="7" height="23.8" rx="3.5" opacity=".9"/>
+              <rect class="wave" x="259" y="35.2" width="7" height="25.6" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="274" y="28.9" width="7" height="38.3" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="289" y="31.2" width="7" height="33.5" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="304" y="31.4" width="7" height="33.2" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="319" y="30.6" width="7" height="34.8" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="334" y="38.2" width="7" height="19.5" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="349" y="38.8" width="7" height="18.5" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="364" y="35.6" width="7" height="24.7" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="379" y="38.1" width="7" height="19.8" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="394" y="30.0" width="7" height="36.0" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="409" y="29.5" width="7" height="37.0" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="424" y="33.4" width="7" height="29.3" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="439" y="30.1" width="7" height="35.9" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="454" y="35.1" width="7" height="25.7" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="469" y="39.7" width="7" height="16.6" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="484" y="36.1" width="7" height="23.8" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="499" y="36.5" width="7" height="23.0" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="514" y="32.0" width="7" height="31.9" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="529" y="28.6" width="7" height="38.9" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="544" y="33.5" width="7" height="28.9" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="559" y="30.5" width="7" height="35.0" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="574" y="32.7" width="7" height="30.6" rx="3.5" opacity=".35"/>
+              <rect class="wave" x="589" y="41.1" width="7" height="13.8" rx="3.5" opacity=".35"/>
+            </g>
+            <line class="curve" x1="255" y1="12" x2="255" y2="84" stroke="var(--red)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+          </svg>
           <div class="proj-top">
-            <span class="proj-meta">2024–2025 · solo · jeu</span>
+            <span class="proj-meta">2026 · équipe de 3 · IoT</span>
             <span class="proj-arrow">↗</span>
           </div>
-          <h3>Dice Versus</h3>
+          <h3>Système audio embarqué</h3>
           <p>
-            Jeu de dés personnel jouable en terminal Linux : structures de données (struct),
-            manipulation de fichiers et logique de jeu maison.
+            Player audio autonome piloté par une application web de gestion. Conception d'un
+            serveur web et d'une API pour synchroniser des playlists à distance.
           </p>
           <div class="chips">
-            <span class="chip">C</span><span class="chip">Structs</span><span class="chip">Fichiers</span>
+            <span class="chip">Linux</span><span class="chip">Client-serveur</span><span class="chip">API REST</span>
           </div>
         </article>
 

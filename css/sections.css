@@ -83,6 +83,16 @@
 .proj:hover .proj-bg .bar{transform:scaleY(1)}
 .proj-bg .curve{opacity:.65;transition:opacity .3s ease}
 .proj:hover .proj-bg .curve{opacity:1}
+.proj-bg .die{transform-box:fill-box;transform-origin:center;transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.proj-bg .die-a{transform:rotate(-8deg)}
+.proj-bg .die-b{transform:rotate(10deg)}
+.proj:hover .proj-bg .die-a{transform:rotate(-16deg) translateY(-4px)}
+.proj:hover .proj-bg .die-b{transform:rotate(16deg) translateY(-4px)}
+.proj-bg .wave{transform-box:fill-box;transform-origin:center;transform:scaleY(.7);transition:transform .4s ease}
+.proj:hover .proj-bg .wave{transform:scaleY(1)}
+/* La carte audio réserve une zone basse pour la forme d'onde */
+.proj-audio{padding-bottom:96px}
+.proj-audio .proj-bg{height:88px}
 
 /* ---- Contact ---- */
 /* Carte volontairement sombre dans les deux thèmes (texte clair codé en dur) */
@@ -101,8 +111,8 @@
 /* ---- Motion réduite ---- */
 @media (prefers-reduced-motion:reduce){
   .proj,.skill-card{transition:none}
-  .proj-bg,.proj-bg .bar,.proj-bg .curve{transition:none}
-  .proj-bg .bar{transform:none}
+  .proj-bg,.proj-bg .bar,.proj-bg .curve,.proj-bg .die,.proj-bg .wave{transition:none}
+  .proj-bg .bar,.proj-bg .wave{transform:none}
 }
 
 /* ---- Responsive ---- */

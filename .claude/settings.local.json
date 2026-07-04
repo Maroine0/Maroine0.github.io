@@ -15,7 +15,8 @@
       "Skill(dataviz)",
       "Bash(rm -rf ~/snap/firefox/common/shots)",
       "Bash(git commit --quiet -m 'Fond stylisé pour la carte Analyse de données *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(python3 *)"
     ]
   }
 }
