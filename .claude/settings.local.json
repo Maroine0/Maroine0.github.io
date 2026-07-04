@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Read(//home/maroine/.ssh/**)",
+      "Bash(git config *)",
+      "Bash(ssh -o BatchMode=yes -o ConnectTimeout=5 -T git@github.com)",
+      "Read(//home/maroine/.config/**)",
+      "Read(//home/maroine/**)",
+      "Bash(env)",
+      "Bash(git commit -m 'Découpage du portfolio en structure HTML/CSS/JS *)",
+      "Bash(git ls-remote *)"
     ]
   }
 }

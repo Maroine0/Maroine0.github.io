@@ -2,6 +2,8 @@
 
 Site statique (HTML/CSS/JS vanilla), sans build ni dépendance. Ouvrir `index.html` dans un navigateur suffit.
 
+Mode clair/sombre : bascule via le bouton dans la nav, préférence sauvegardée en `localStorage`, thème système suivi par défaut. Les variables du thème sombre sont dans `css/base.css` sous `:root[data-theme="dark"]`.
+
 ## Structure
 
 ```

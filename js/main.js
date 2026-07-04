@@ -6,6 +6,21 @@
 
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* ---- Thème clair / sombre ----
+   Le thème initial est appliqué par le script inline du <head> (anti-flash). */
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
+  const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem('theme', next);
+});
+/* Suit le thème système tant que l'utilisateur n'a pas choisi manuellement */
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+  if (!localStorage.getItem('theme')) {
+    document.documentElement.dataset.theme = e.matches ? 'dark' : 'light';
+  }
+});
+
 /* ---- Nav : fond au scroll ---- */
 const headerEl = document.getElementById('site-header');
 const onScrollHeader = () => headerEl.classList.toggle('scrolled', window.scrollY > 24);

@@ -4,7 +4,7 @@
 
 /* ---- Nav ---- */
 header{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .25s ease,border-color .25s ease;border-bottom:1px solid transparent}
-header.scrolled{background:rgba(244,245,247,.88);backdrop-filter:blur(12px);border-bottom-color:var(--line)}
+header.scrolled{background:var(--header-bg);backdrop-filter:blur(12px);border-bottom-color:var(--line)}
 .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
 .logo{font-family:var(--m);font-size:.85rem;display:flex;align-items:center;gap:9px}
 .logo .sq{width:11px;height:11px;background:var(--blue);display:inline-block}
@@ -13,6 +13,13 @@ header.scrolled{background:rgba(244,245,247,.88);backdrop-filter:blur(12px);bord
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--dot);transition:width .2s ease}
 .nav-links a:hover{color:var(--ink)}
 .nav-links a:hover::after{width:100%}
+.nav-right{display:flex;align-items:center;gap:22px}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:color .15s ease,border-color .15s ease,transform .15s ease}
+.theme-toggle:hover{color:var(--ink);border-color:var(--ink);transform:rotate(15deg)}
+.theme-toggle svg{width:16px;height:16px}
+.theme-toggle .icon-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none}
 
 /* ---- Hero ---- */
 .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 40px;position:relative}
