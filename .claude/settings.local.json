@@ -10,7 +10,12 @@
       "Read(//home/maroine/**)",
       "Bash(env)",
       "Bash(git commit -m 'Découpage du portfolio en structure HTML/CSS/JS *)",
-      "Bash(git ls-remote *)"
+      "Bash(git ls-remote *)",
+      "Bash(python3 -c ' *)",
+      "Skill(dataviz)",
+      "Bash(rm -rf ~/snap/firefox/common/shots)",
+      "Bash(git commit --quiet -m 'Fond stylisé pour la carte Analyse de données *)",
+      "Bash(git push *)"
     ]
   }
 }

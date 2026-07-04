@@ -76,6 +76,14 @@
 .term-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--m);font-size:.8rem;color:#5DA9FF;margin-top:18px}
 .term-link:hover{text-decoration:underline}
 
+/* ---- Fond stylisé des cartes projet ---- */
+.proj-bg{position:absolute;left:0;right:0;bottom:0;width:100%;height:52%;pointer-events:none;opacity:.3;transition:opacity .3s ease}
+.proj:hover .proj-bg{opacity:.5}
+.proj-bg .bar{transform:scaleY(.82);transform-origin:bottom;transition:transform .4s cubic-bezier(.2,.7,.3,1)}
+.proj:hover .proj-bg .bar{transform:scaleY(1)}
+.proj-bg .curve{opacity:.65;transition:opacity .3s ease}
+.proj:hover .proj-bg .curve{opacity:1}
+
 /* ---- Contact ---- */
 /* Carte volontairement sombre dans les deux thèmes (texte clair codé en dur) */
 .contact{background:#0D131E;color:#fff;border-radius:18px;padding:70px 60px;text-align:left;position:relative;overflow:hidden}
@@ -93,6 +101,8 @@
 /* ---- Motion réduite ---- */
 @media (prefers-reduced-motion:reduce){
   .proj,.skill-card{transition:none}
+  .proj-bg,.proj-bg .bar,.proj-bg .curve{transition:none}
+  .proj-bg .bar{transform:none}
 }
 
 /* ---- Responsive ---- */
