@@ -27,6 +27,19 @@ const onScrollHeader = () => headerEl.classList.toggle('scrolled', window.scroll
 window.addEventListener('scroll', onScrollHeader, {passive:true});
 onScrollHeader();
 
+/* ---- Menu mobile (burger) ---- */
+const burger = document.getElementById('navBurger');
+function setNavOpen(open){
+  document.body.classList.toggle('nav-open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+}
+burger.addEventListener('click', () => setNavOpen(!document.body.classList.contains('nav-open')));
+/* Fermeture au clic sur un lien, à l'Échap, ou si on repasse en desktop */
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => setNavOpen(false)));
+window.addEventListener('keydown', e => { if (e.key === 'Escape') setNavOpen(false); });
+window.matchMedia('(min-width: 721px)').addEventListener('change', e => { if (e.matches) setNavOpen(false); });
+
 /* ---- Rotation des rôles ---- */
 const roles = ["science des données", "développement web", "jeux vidéo (en C !)"];
 const swap = document.getElementById('roleSwap');
@@ -49,7 +62,8 @@ track.innerHTML += track.innerHTML;
 /* ---- Signature : le carré bleu mange les carrés jaunes au scroll ---- */
 const pacTrack = document.getElementById('pacTrack');
 const muncher = document.getElementById('muncher');
-const NB_DOTS = 36;
+/* 36 points sur desktop, moins sur mobile pour garder l'espacement */
+const NB_DOTS = Math.max(10, Math.min(36, Math.floor(pacTrack.clientWidth / 24)));
 for (let d = 0; d < NB_DOTS; d++) {
   const s = document.createElement('div');
   s.className = 'pdot';
