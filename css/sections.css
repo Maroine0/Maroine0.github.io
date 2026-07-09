@@ -118,7 +118,20 @@
 /* ---- Responsive ---- */
 @media (max-width:900px){
   .about-grid,.term-body{grid-template-columns:1fr}
+  .about-grid{gap:40px}
   .proj-grid{grid-template-columns:1fr}
   .tl > li{grid-template-columns:1fr;gap:8px}
   .contact{padding:46px 30px}
+}
+
+@media (max-width:600px){
+  .sec-head{gap:14px;margin-bottom:36px}
+  .facts{padding:20px 22px}
+  .proj{padding:22px}
+  .proj-audio{padding-bottom:88px}
+  .term-body{padding:22px 20px;gap:24px}
+  .tl > li{padding:24px 0}
+  .contact{padding:40px 22px}
+  .mail-big{overflow-wrap:anywhere}
+  .contact-row{gap:14px 24px}
 }
