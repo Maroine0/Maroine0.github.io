@@ -21,6 +21,14 @@ header.scrolled{background:var(--header-bg);backdrop-filter:blur(12px);border-bo
 :root[data-theme="dark"] .theme-toggle .icon-sun{display:block}
 :root[data-theme="dark"] .theme-toggle .icon-moon{display:none}
 
+/* ---- Burger (mobile uniquement) ---- */
+.nav-burger{display:none;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:color .15s ease,border-color .15s ease}
+.nav-burger:hover{color:var(--ink);border-color:var(--ink)}
+.nav-burger svg{width:16px;height:16px}
+.nav-burger .icon-close{display:none}
+body.nav-open .nav-burger .icon-close{display:block}
+body.nav-open .nav-burger .icon-burger{display:none}
+
 /* ---- Hero ---- */
 .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 40px;position:relative}
 .hero-eyebrow{font-family:var(--m);font-size:.82rem;color:var(--blue);margin-bottom:22px;display:flex;align-items:center;gap:12px}
@@ -65,11 +73,39 @@ footer{padding:34px 0 40px}
   .marquee-track{animation:none}
   .hero-eyebrow .pulse{animation:none}
   .muncher{transition:none}
+  .nav-right nav{transition:none}
 }
 
 /* ---- Responsive ---- */
 @media (max-width:900px){
   .hero{min-height:auto;padding:130px 0 90px}
   .hero-meta{position:static;margin-top:56px}
-  .nav-links li:nth-child(n+4){display:none}
+}
+
+/* Sous 720px : la nav passe en panneau déroulant sous le header */
+@media (max-width:720px){
+  .nav-burger{display:inline-flex}
+  .nav-right{gap:12px}
+  .nav-right nav{position:absolute;top:66px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 18px 30px rgba(13,19,30,.08);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s ease,transform .2s ease,visibility 0s .2s}
+  body.nav-open .nav-right nav{opacity:1;visibility:visible;transform:none;transition:opacity .2s ease,transform .2s ease}
+  .nav-links{flex-direction:column;gap:0;padding:8px 28px 14px}
+  .nav-links a{display:block;padding:13px 0;font-size:.9rem;border-bottom:1px dashed var(--line)}
+  .nav-links li:last-child a{border-bottom:none}
+  .nav-links a::after{display:none}
+  body.nav-open header{background:var(--paper);border-bottom-color:var(--line)}
+}
+
+/* Sous 720px : le titre suit la largeur de l'écran (Syne est une police
+   très large — « IMOUNANE » dépasserait l'écran au plancher desktop) */
+@media (max-width:720px){
+  h1{font-size:clamp(1.6rem,8.6vw,3.4rem)}
+  .hero-eyebrow{display:block}
+  .hero-eyebrow .pulse{display:inline-block;vertical-align:baseline;margin-right:10px}
+}
+
+@media (max-width:600px){
+  .hero{padding:112px 0 70px}
+  .hero-meta{margin-top:44px;gap:14px 28px}
+  .marquee span{font-size:1.25rem;padding:0 20px}
+  .marquee span:nth-child(odd)::before{margin-right:20px}
 }
